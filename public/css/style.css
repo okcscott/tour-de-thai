@@ -1,0 +1,92 @@
+body {
+  background: url("../img/tour_background.png") fixed;
+  background-size: cover;
+}
+
+.navigation {
+  background: #000;
+  height: 50px;
+  border-bottom: solid 8px #fff22d;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #fff;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+}
+
+.navigation h2 {
+  font-size: 25px;
+}
+
+.navigation h2 img {
+  width: 55px;
+  padding-right: 10px;
+}
+
+.team {
+  margin-bottom: 40px;
+}
+
+.owner {
+  background: #fff;
+  width: 300px;
+  margin-bottom: 20px;
+  border-bottom: solid 6px #fff22d;
+  font-family: 'Oswald', sans-serif;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.owner .name {
+  float: left;
+  padding-left: 10px;
+  padding: 20px;
+}
+
+.owner .score {
+  float: right;
+  padding: 20px 0;
+  background: #000;
+  color: #fff;
+  width: 80px;
+  text-align: center;
+}
+
+.owner .name span {
+  color: #ddd;
+  font-size: 12px;
+  display: none;
+}
+
+@media (max-width: 767px) { 
+  .owner {
+    width: 100%;
+  }
+
+  .navigation h2 {
+    text-align: center;
+  }
+
+  .row-fluid [class*="span"] {
+    float: left;
+    width: 48%;
+    margin-bottom: 2%;
+  }
+
+  .row-fluid [class*="span"]:nth-child(even) {
+    margin-left: 2%;
+    background: #000;
+  }
+
+  .riders {
+    display: none;
+  }
+
+  .owner .name span {
+    display: inline;
+  }
+}

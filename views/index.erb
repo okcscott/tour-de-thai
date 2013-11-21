@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fantasy Tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="css/style.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="navigation">
+      <div class="container"><h2>Le Tour de Thai</h2></div>
+    </div>
+    <div id="teams" class="container">
+      <% for row in 1..@ws.num_rows %>
+        <div class="team mix" data-score="<%= @ws[row,2] %>">
+          <div class="owner row-fluid" data-id="<%= @ws[row,1] %>" >
+            <div class="name"><%= @ws[row,1] %></div>
+            <div class="score"><%= @ws[row,2] %></div>
+            <div class="clear"></div>
+          </div>
+          <div class="riders row-fluid">
+            <% for rider in 1..6 %>
+              <img src="img/<%=@ws[row,(2+rider)] %>.jpg" class="span2" />
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#teams').mixitup({layoutMode: 'list', sortOnLoad:['data-score','asc']});
+
+        function updateScores() {
+          $.get('/scores', function(data) {
+            for(var i = 0; i < data.length; i++) {
+              var owner = $('.owner[data-id="'+ data[i].name +'"]');
+              owner.find('.score').html(data[i].score);
+              owner.parent().attr('data-score', data[i].score);
+            }
+            $('#teams').mixitup('sort',['data-score','asc']);
+          });
+        }
+
+        function timerFunc() {
+          updateScores();
+        }
+
+        setInterval(timerFunc, 15000);
+
+        $('.owner').click(function() {
+          if($(window).width() < 767) {
+            $(this).parent().find('.riders').slideToggle();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
